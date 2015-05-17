@@ -1,6 +1,8 @@
 This is a demo repository for a tutorial on using next-gen web technologies
 with today's frameworks.
 
+Article: [http://mitranim.com/thoughts/next-generation-today/](http://mitranim.com/thoughts/next-generation-today/).
+
 To get started, run the following:
 
 ```sh

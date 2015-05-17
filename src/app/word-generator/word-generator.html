@@ -1,0 +1,29 @@
+<div class="flex">
+  <!-- Left column: source words -->
+  <div class="pad flex-1 pad-ch-v-05">
+    <h3>Source Words</h3>
+    <form ng-submit="self.add()" class="flex flex-row" sf-tooltip="{{self.error}}" sf-trigger="{{!!self.error}}">
+      <input autofocus class="sf-input flex-11" ng-model="self.word">
+      <button class="sf-btn flex-1 success" tabindex="-1">Add</button>
+    </form>
+    <div ng-repeat="word in self.words" class="flex justify-between">
+      {{word}}
+      <button class="sf-btn" ng-click="self.drop(word)">✕</button>
+    </div>
+  </div>
+
+  <!-- Right column: generated results -->
+  <div class="pad flex-1 pad-ch-v-05">
+    <h3>Generated Words</h3>
+    <form ng-submit="self.generate()" class="flex flex-row">
+      <button class="sf-btn success flex-1" tabindex="-1">Generate</button>
+    </form>
+    <div ng-repeat="word in self.results" class="flex justify-between">
+      <button class="sf-btn" ng-click="self.pick(word)">←</button>
+      <span class="flex-1" style="text-align: right">{{word}}</span>
+    </div>
+    <div ng-if="self.depleted" class="flex justify-between">
+      <span class="flex-1" style="text-align: right">(depleted)</span>
+    </div>
+  </div>
+</div>

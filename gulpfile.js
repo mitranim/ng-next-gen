@@ -63,6 +63,14 @@ gulp.task('html:watch', function() {
   $.watch('src/html/**/*', function() {return gulp.start('html:compile')})
 })
 
+gulp.task('system:copy', function() {
+  return gulp.src('system.config.js').pipe(gulp.dest('dist'))
+})
+
+gulp.task('system:watch', function() {
+  $.watch('system.config.js', function() {return gulp.start('system:copy')})
+})
+
 gulp.task('bsync', function() {
   return bsync.init({
     server: {
@@ -73,8 +81,8 @@ gulp.task('bsync', function() {
   })
 })
 
-gulp.task('build', ['scripts:ts', 'html:compile'])
+gulp.task('build', ['scripts:ts', 'html:compile', 'system:copy'])
 
-gulp.task('default', ['build', 'scripts:watch', 'html:watch'], function() {
+gulp.task('default', ['build', 'scripts:watch', 'html:watch', 'system:watch'], function() {
   return gulp.start('bsync')
 })

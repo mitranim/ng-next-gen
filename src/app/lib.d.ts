@@ -1,8 +1,14 @@
 declare module 'ng-decorate' {
-  export function Attribute(config);
-  export function Ambient(config);
-  export function Component(config);
-  export function Service(config);
+  export function Attribute(config: any): any;
+  export function Ambient(config: any): any;
+  export function Component(config: any): any;
+  export function Service(config: any): any;
+
+  export function bindTwoWay(settings: any): any;
+  export function bindOneWay(key: string): any;
+  export function bindString(key: string): any;
+  export function bindExpression(key: string): any;
+
   export var defaults: {
     module?: ng.IModule;
     moduleName?: string;

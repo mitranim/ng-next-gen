@@ -7,7 +7,8 @@
     "bundle": "jspm bundle-sfx boot --minify",
     "build-prod": "gulp build --prod && npm run bundle",
     "serve-prod": "npm run build-prod && gulp bsync",
-    "postinstall": "jspm install && tsd update"
+    "postinstall": "jspm install && tsd update",
+    "push": "npm run build-prod && (cd dist && git add -A . && git commit -a -m autocommit && git push origin gh-pages)"
   },
   "description": "Demo for using next-gen web technologies with today's frameworks.",
   "author": "Mitranim",

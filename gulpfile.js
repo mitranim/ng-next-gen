@@ -59,14 +59,6 @@ gulp.task('html:compile', ['html:clear'], function() {
       relativeDir: 'src/html',
       imports: {prod: prod}
     }))
-    // Change each `<filename>` into `<filename>/index.html`.
-    .pipe($.rename(function(path) {
-      switch (path.basename + path.extname) {
-        case 'index.html': case '404.html': return
-      }
-      path.dirname = pt.join(path.dirname, path.basename)
-      path.basename = 'index'
-    }))
     .pipe(gulp.dest('dist'))
     .pipe(bsync.reload({stream: true}));
 });

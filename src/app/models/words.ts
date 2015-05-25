@@ -1,6 +1,6 @@
 import {Service} from 'ng-decorate';
 
-const url = 'https://incandescent-torch-3438.firebaseio.com/foliant/defaults/words/eng.json';
+export const wordsUrl = 'https://incandescent-torch-3438.firebaseio.com/foliant/defaults/words/eng.json';
 
 @Service({
   injectStatic: ['$http'],
@@ -16,7 +16,7 @@ export class Words {
 
   static readAll() {
     return this.$http({
-      url: url,
+      url: wordsUrl,
       method: 'GET'
     })
     .then(response => new Words(<StringMap>response.data));

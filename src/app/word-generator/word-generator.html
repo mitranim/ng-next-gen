@@ -1,11 +1,13 @@
 <div class="flex pad-ch">
   <!-- Left column: source words -->
-  <div class="flex-1 space-out-v"
-       drop-action="self.pick($data)" drop-type="move">
-    <h3 class="info pad">Source Words</h3>
+  <div class="flex-1 space-out-v" drop-action="self.pick($data)" drop-type="move">
+    <h3 class="info pad flex justify-between">
+      <span>Source Words</span>
+      <span id="indicator"></span>
+    </h3>
     <form ng-submit="self.add()" class="flex flex-row pad-ch"
           sf-tooltip="{{self.error}}" sf-trigger="{{!!self.error}}">
-      <input autofocus class="sf-input flex-11" tabindex="1" ng-model="self.word">
+      <input class="sf-input flex-11" tabindex="1" ng-model="self.word">
       <button class="sf-btn flex-1 success" tabindex="1">Add</button>
     </form>
     <div ng-repeat="word in self.words" class="flex justify-between pad-ch">
@@ -30,6 +32,21 @@
     </div>
   </div>
 </div>
+
+<!--
+Demonstrating interoperability.
+
+1) `on-load` executes an Angular expression in the component scope in response
+   to a DOM event. This would also work if <ajax> came from another library,
+   like Polymer, or was a native element.
+
+2) `onload` executes a native DOM expression in the global scope. It doesn't
+   care that <ajax> is an Angular element, and has access to the dispatched data.
+ -->
+<ajax auto="true" url="self.wordsUrl" ref="self.ajax"
+      on-load="self.refresh($event.detail); self.generate()"
+      onload="console.log(event.detail);
+              indicator.innerText = 'Loaded at: ' + event.timeStamp"></ajax>
 
 <style>
   .dragover {

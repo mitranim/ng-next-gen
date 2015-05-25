@@ -5,9 +5,9 @@ declare module 'ng-decorate' {
   export function Service(config: any): any;
 
   export function bindTwoWay(settings: any): any;
-  export function bindOneWay(key: string): any;
-  export function bindString(key: string): any;
-  export function bindExpression(key: string): any;
+  export function bindOneWay(key?: string): any;
+  export function bindString(key?: string): any;
+  export function bindExpression(key?: string): any;
 
   export var defaults: {
     module?: ng.IModule;

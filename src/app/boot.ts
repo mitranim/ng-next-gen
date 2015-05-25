@@ -4,6 +4,7 @@ import {app} from 'app';
 import 'views';
 import 'attributes/all';
 import 'models/all';
+import 'ajax/ajax';
 import 'word-generator/word-generator';
 
 // Bootstrap the app.

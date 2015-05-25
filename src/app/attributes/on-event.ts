@@ -21,9 +21,8 @@ mouseleave keydown keyup keypress submit focus blur copy cut paste`;
 /**
  * Additional events.
  */
-`change
-dragstart drag dragenter dragleave dragover drop dragend
-input wheel scroll`.split(/\s+/).forEach(eventName => {
+`change dragstart drag dragenter dragleave dragover drop dragend
+error input load wheel scroll`.split(/\s+/).forEach(eventName => {
   var directiveName = 'on' + eventName[0].toUpperCase() + eventName.slice(1);
 
   app.directive(directiveName, ['$parse', function($parse: ng.IParseService) {

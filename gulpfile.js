@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
@@ -9,6 +9,8 @@ var pt = require('path');
 function prod() {
   return flags.prod === true || flags.prod === 'true';
 }
+
+/*--------------------------------- Scripts ---------------------------------*/
 
 gulp.task('scripts:clear', function() {
   return gulp.src('dist/app/**/*.js', {read: false, allowEmpty: true})
@@ -42,6 +44,8 @@ gulp.task('scripts:watch', function() {
   $.watch('src/app/**/*', function() {return gulp.start('scripts:ts')});
 });
 
+/*---------------------------------- HTML -----------------------------------*/
+
 gulp.task('html:clear', function() {
   return gulp.src([
       'dist/**/*.html',
@@ -67,6 +71,19 @@ gulp.task('html:watch', function() {
   $.watch('src/html/**/*', function() {return gulp.start('html:compile')});
 });
 
+/*--------------------------------- Styles ----------------------------------*/
+
+gulp.task('styles:copy', function() {
+  return gulp.src('dist/jspm_packages/npm/stylific@0.0.11/css/stylific.css')
+    .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('styles:watch', function() {
+  $.watch('dist/jspm_packages/npm/stylific@0.0.11/css/stylific.css', function() {return gulp.start('styles:copy')});
+});
+
+/*--------------------------------- System ----------------------------------*/
+
 gulp.task('system:copy', function() {
   return gulp.src('system.config.js').pipe(gulp.dest('dist'));
 });
@@ -75,18 +92,27 @@ gulp.task('system:watch', function() {
   $.watch('system.config.js', function() {return gulp.start('system:copy')});
 });
 
-gulp.task('bsync', function() {
+/*--------------------------------- Server ----------------------------------*/
+
+gulp.task('server', function() {
   return bsync.init({
+    startPath: '/ng-next-gen/',
     server: {
-      baseDir: 'dist'
+      baseDir: 'dist',
+      middleware: function(req, res, next) {
+        req.url = req.url.replace(/^\/ng-next-gen/, '/')
+        next()
+      }
     },
     port: 9238,
     online: false
   });
 });
 
-gulp.task('build', ['scripts:ts', 'html:compile', 'system:copy']);
+/*--------------------------------- Default ---------------------------------*/
 
-gulp.task('default', ['build', 'scripts:watch', 'html:watch', 'system:watch'], function() {
-  return gulp.start('bsync');
+gulp.task('build', ['scripts:ts', 'html:compile', 'styles:copy', 'system:copy']);
+
+gulp.task('default', ['build', 'scripts:watch', 'html:watch', 'styles:watch', 'system:watch'], function() {
+  return gulp.start('server');
 });

@@ -1,6 +1,7 @@
 import Traits from 'foliant';
 import {Component} from 'ng-decorate';
-import {Words} from 'models/all';
+import {Words, wordsUrl} from 'models/all';
+import {Ajax} from 'ajax/ajax';
 
 @Component({
   selector: 'word-generator'
@@ -8,34 +9,36 @@ import {Words} from 'models/all';
 class VM {
   // Source words.
   words: string[];
+  // Generated words.
+  results: string[] = [];
   // Input.
   word: string = '';
   // Error.
   error: string = null;
   // True when the generator is out of words.
   depleted: boolean = false;
-  // Words generator.
+  // Words generator from `foliant`.
   gen: () => string;
-  // Generated words.
-  results: string[] = [];
-
-  constructor() {
-    this.reload().then(this.generate.bind(this));
-  }
+  // DOM element.
+  element: HTMLElement;
+  // Silly ajax component.
+  ajax: Ajax;
+  // URL for the ajax component.
+  wordsUrl = wordsUrl;
 
   /**
-   * Reloads the example words from the backend.
+   * Takes the given set as the source words and regenerates the results.
    */
-  reload() {
-    return Words.readAll().then(words => {
-      this.words = Object.keys(words).map(key => words[key]);
-    });
+  refresh(words: Words) {
+    this.words = Object.keys(words).map(key => words[key]);
+    this.gen = new Traits(this.words).generator();
+    this.generate();
   }
 
   /**
    * Word count limit.
    */
-  get limit(): number {return 12}
+  get limit(): number {return 6}
 
   /**
    * Generates a group of words.
@@ -105,14 +108,8 @@ class VM {
   remove(word: string): void {
     var index = this.words.indexOf(word);
     if (~index) this.words.splice(index, 1);
-    if (!this.words.length) {
-      this.reload().then(() => {
-        this.gen = new Traits(this.words).generator();
-        this.generate();
-      });
-    } else {
-      this.gen = new Traits(this.words).generator();
-    }
+    if (!this.words.length) this.ajax.load();
+    else this.gen = new Traits(this.words).generator();
   }
 
   /**

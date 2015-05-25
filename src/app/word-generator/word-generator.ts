@@ -102,7 +102,7 @@ class VM {
   /**
    * Drops a word from the source and refreshes the generator.
    */
-  drop(word: string): void {
+  remove(word: string): void {
     var index = this.words.indexOf(word);
     if (~index) this.words.splice(index, 1);
     if (!this.words.length) {

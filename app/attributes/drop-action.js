@@ -36,10 +36,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
                         scope.$applyAsync();
                     });
                 };
+                __decorate([
+                    ng_decorate_1.autoinject
+                ], VM, "$parse");
                 VM = __decorate([
                     ng_decorate_1.Attribute({
-                        selector: '[drop-action]',
-                        injectStatic: ['$parse']
+                        selector: '[drop-action]'
                     })
                 ], VM);
                 return VM;

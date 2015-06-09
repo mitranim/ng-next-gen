@@ -38,10 +38,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
                     // Assign it to given path.
                     path.assign(scope, ctrl);
                 };
+                __decorate([
+                    ng_decorate_1.autoinject
+                ], VM, "$parse");
                 VM = __decorate([
                     ng_decorate_1.Attribute({
-                        selector: '[ref]',
-                        injectStatic: ['$parse']
+                        selector: '[ref]'
                     })
                 ], VM);
                 return VM;

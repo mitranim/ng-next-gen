@@ -25,10 +25,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
                         event.dataTransfer.setData('any', expression(scope, { $event: event }));
                     });
                 };
+                __decorate([
+                    ng_decorate_1.autoinject
+                ], VM, "$parse");
                 VM = __decorate([
                     ng_decorate_1.Attribute({
-                        selector: '[drag-value]',
-                        injectStatic: ['$parse']
+                        selector: '[drag-value]'
                     })
                 ], VM);
                 return VM;

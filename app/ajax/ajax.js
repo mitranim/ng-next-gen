@@ -69,16 +69,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
                 };
                 Ajax.$inject = ['$element'];
                 __decorate([
-                    ng_decorate_1.bindOneWay()
+                    ng_decorate_1.bindOneWay
                 ], Ajax.prototype, "url");
                 __decorate([
-                    ng_decorate_1.bindOneWay()
+                    ng_decorate_1.bindOneWay
                 ], Ajax.prototype, "auto");
+                __decorate([
+                    ng_decorate_1.autoinject
+                ], Ajax.prototype, "$http");
                 Ajax = __decorate([
                     ng_decorate_1.Component({
                         selector: 'ajax',
-                        templateUrl: null,
-                        inject: ['$http']
+                        templateUrl: null
                     })
                 ], Ajax);
                 return Ajax;

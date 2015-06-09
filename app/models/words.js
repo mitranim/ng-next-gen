@@ -28,9 +28,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
                     })
                         .then(function (response) { return new Words(response.data); });
                 };
+                __decorate([
+                    ng_decorate_1.autoinject
+                ], Words, "$http");
                 Words = __decorate([
                     ng_decorate_1.Service({
-                        injectStatic: ['$http'],
                         serviceName: 'Words'
                     })
                 ], Words);

@@ -1,4 +1,4 @@
-import {Attribute, defaults} from 'ng-decorate';
+import {Attribute, defaults, autoinject} from 'ng-decorate';
 
 /**
  * Looks for a component controller on the given element and assigns it to
@@ -9,11 +9,10 @@ import {Attribute, defaults} from 'ng-decorate';
  *   <my-loading-indicator ng-if="self.inner.loading"></my-loading-indicator>
  */
 @Attribute({
-  selector: '[ref]',
-  injectStatic: ['$parse']
+  selector: '[ref]'
 })
 class VM {
-  static $parse: ng.IParseService;
+  @autoinject static $parse: ng.IParseService;
 
   static link(scope: ng.IScope, $element: ng.IAugmentedJQuery) {
     var element = $element[0];

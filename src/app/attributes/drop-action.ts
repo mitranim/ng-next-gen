@@ -1,11 +1,10 @@
-import {Attribute} from 'ng-decorate';
+import {Attribute, autoinject} from 'ng-decorate';
 
 @Attribute({
-  selector: '[drop-action]',
-  injectStatic: ['$parse']
+  selector: '[drop-action]'
 })
 class VM {
-  static $parse: ng.IParseService;
+  @autoinject static $parse: ng.IParseService;
 
   static link(scope: ng.IScope, $element: ng.IAugmentedJQuery) {
     var element: HTMLElement = $element[0];

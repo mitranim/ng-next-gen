@@ -1,13 +1,12 @@
-import {Service} from 'ng-decorate';
+import {Service, autoinject} from 'ng-decorate';
 
 export const wordsUrl = 'https://incandescent-torch-3438.firebaseio.com/foliant/defaults/words/eng.json';
 
 @Service({
-  injectStatic: ['$http'],
   serviceName: 'Words'
 })
 export class Words {
-  static $http: ng.IHttpService;
+  @autoinject static $http: ng.IHttpService;
   [key: string]: string;
 
   constructor(fields?: StringMap) {

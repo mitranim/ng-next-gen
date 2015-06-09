@@ -4,6 +4,7 @@ declare module 'ng-decorate' {
   export function Component(config: any): any;
   export function Service(config: any): any;
 
+  export function autoinject(target: any, key: string): void;
   export function bindTwoWay(settings: any): any;
   export function bindOneWay(key?: string): any;
   export function bindString(key?: string): any;

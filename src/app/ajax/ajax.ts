@@ -1,4 +1,4 @@
-import {Component, bindOneWay} from 'ng-decorate';
+import {Component, bindOneWay, autoinject} from 'ng-decorate';
 
 /**
  * Silly ajax component.
@@ -12,20 +12,19 @@ import {Component, bindOneWay} from 'ng-decorate';
  */
 @Component({
   selector: 'ajax',
-  templateUrl: null,
-  inject: ['$http']
+  templateUrl: null
 })
 export class Ajax {
   // Bindable
-  @bindOneWay() url: string;
-  @bindOneWay() auto: boolean;
+  @bindOneWay url: string;
+  @bindOneWay auto: boolean;
 
   // Injected
-  private $http: ng.IHttpService;
-  element: HTMLElement;
+  @autoinject private $http: ng.IHttpService;
 
   // Fields.
   loading = false;
+  element: HTMLElement;
 
   static $inject = ['$element'];
   constructor($element: ng.IAugmentedJQuery) {

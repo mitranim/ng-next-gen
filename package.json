@@ -1,6 +1,6 @@
 {
   "name": "ng-next-gen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "gulp",
@@ -22,12 +22,12 @@
     "gulp-ng-html2js": "^0.2.0",
     "gulp-plumber": "^1.0.0",
     "gulp-rimraf": "^0.1.1",
-    "gulp-statil": "0.0.2",
+    "gulp-statil": "0.0.3",
     "gulp-typescript": "^2.7.4",
     "gulp-watch": "^4.2.4",
     "jspm": "^0.15.6",
     "tsd": "^0.6.0",
-    "typescript": "git://github.com/microsoft/TypeScript.git",
+    "typescript": "microsoft/TypeScript",
     "yargs": "^3.9.0"
   },
   "jspm": {
@@ -38,7 +38,7 @@
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.3.15",
       "foliant": "npm:foliant@^0.0.1",
-      "ng-decorate": "npm:ng-decorate@^0.0.11",
+      "ng-decorate": "npm:ng-decorate@^0.0.13",
       "stylific": "npm:stylific@0.0.11"
     },
     "devDependencies": {

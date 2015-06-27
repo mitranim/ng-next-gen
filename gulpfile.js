@@ -34,7 +34,8 @@ gulp.task('scripts:ts', ['scripts:views'], function() {
       noExternalResolve: true,
       typescript: require('typescript'),
       target: 'ES5',
-      module: 'system'
+      module: 'system',
+      experimentalDecorators: true
     }))
     .pipe(gulp.dest('dist/app'))
     .pipe(bsync.reload({stream: true}));
@@ -60,7 +61,7 @@ gulp.task('html:compile', ['html:clear'], function() {
   return gulp.src('src/html/**/*')
     .pipe($.plumber())
     .pipe($.statil({
-      relativeDir: 'src/html',
+      stripPrefix: 'src/html',
       imports: {prod: prod}
     }))
     .pipe(gulp.dest('dist'))

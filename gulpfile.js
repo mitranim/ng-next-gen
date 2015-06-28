@@ -23,13 +23,22 @@ gulp.task('scripts:views', ['scripts:clear'], function() {
     .pipe($.plumber())
     .pipe($.ngHtml2js({moduleName: 'app'}))
     .pipe($.concat('views.js'))
-    .pipe($.babel({modules: 'system'}))
+    .pipe($.replace(/^([^]*)$/,
+      'System.register([], function() {\n' +
+      '  return {\n' +
+      '    setters: [],\n' +
+      '    execute: function() {\n' +
+      '      $1\n' +
+      '    }\n' +
+      '  };\n' +
+      '});\n'))
     .pipe(gulp.dest('dist/app'));
 });
 
 gulp.task('scripts:ts', ['scripts:views'], function() {
   return gulp.src('src/app/**/*.ts')
     .pipe($.plumber())
+    .pipe($.sourcemaps.init())
     .pipe($.typescript({
       noExternalResolve: true,
       typescript: require('typescript'),
@@ -37,6 +46,7 @@ gulp.task('scripts:ts', ['scripts:views'], function() {
       module: 'system',
       experimentalDecorators: true
     }))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('dist/app'))
     .pipe(bsync.reload({stream: true}));
 });
@@ -75,12 +85,12 @@ gulp.task('html:watch', function() {
 /*--------------------------------- Styles ----------------------------------*/
 
 gulp.task('styles:copy', function() {
-  return gulp.src('dist/jspm_packages/npm/stylific@0.0.11/css/stylific.css')
+  return gulp.src('node_modules/stylific/lib/stylific.css')
     .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('styles:watch', function() {
-  $.watch('dist/jspm_packages/npm/stylific@0.0.11/css/stylific.css', function() {return gulp.start('styles:copy')});
+  $.watch('node_modules/stylific/lib/stylific.css', function() {return gulp.start('styles:copy')});
 });
 
 /*--------------------------------- System ----------------------------------*/

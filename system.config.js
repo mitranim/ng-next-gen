@@ -13,7 +13,6 @@ System.config({
     "angular": "github:angular/bower-angular@1.4.1",
     "foliant": "npm:foliant@0.0.1",
     "ng-decorate": "npm:ng-decorate@0.0.15",
-    "stylific": "npm:stylific@0.0.11",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "github:jspm/nodelibs-process@0.1.1": {
@@ -24,9 +23,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:lodash@3.9.3": {
-      "process": "github:jspm/nodelibs-process@0.1.1"
-    },
-    "npm:stylific@0.0.11": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     }
   }

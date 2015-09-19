@@ -11,3 +11,5 @@ cd ng-next-gen
 npm install
 npm start
 ```
+
+TODO fix slow TypeScript builds (2s on my machine).

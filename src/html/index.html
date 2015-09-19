@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/ng-next-gen/css/stylific.css">
+    <link rel="stylesheet" href="/ng-next-gen/styles/stylific.css">
     <base href="/ng-next-gen/"></base>
+    <link rel="icon" href="data:;base64,=">
   </head>
   <body>
-    <sf-article>
-      <word-generator></word-generator>
-    </sf-article>
+    <word-generator></word-generator>
 
-    <% if (prod()) { %>
-      <script src="build.js"></script>
-    <% } else { %>
-      <script src="jspm_packages/es6-module-loader.js"></script>
-      <script src="jspm_packages/system.js"></script>
-      <script src="system.config.js"></script>
-      <script>
-        System.import('boot');
-      </script>
+    <script src="app/app.js" async></script>
+    <% if (!prod()) { %>
+      <!-- optionally include development-specific configuration here -->
     <% } %>
   </body>
 </html>

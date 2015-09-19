@@ -8,7 +8,7 @@
  *   <custom-selector on-select="self.pick($event.detail)"></custom-selector>
  */
 
-import {app} from 'app';
+import {app} from '../app';
 
 /**
  * For reference, list of events registered in

@@ -1,3 +1,5 @@
+declare function require(...args: any[]): any;
+
 declare module 'ng-decorate' {
   export var Attribute: typeof ngDecorate.Attribute;
   export var Ambient: typeof ngDecorate.Ambient;
@@ -114,7 +116,7 @@ declare module 'foliant' {
     knownSounds: StringSet;
     knownVowels: StringSet;
   }
-  export default Traits;
+  export = Traits;
 }
 
 declare type StringMap = {[key: string]: string};

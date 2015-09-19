@@ -1,34 +1,39 @@
-<div layout="space-out">
+<div class="container layout-row">
   <!-- Left column: source words -->
-  <div flex="1" class="space-out" drop-action="self.pick($data)" drop-type="move">
-    <h3 theme="text-primary" layout="space-between">
+  <div class="flex-1 container" drop-action="self.pick($data)" drop-type="move">
+    <h3 class="theme-text-primary">
       <span>Source Words</span>
       <span id="indicator"></span>
     </h3>
-    <form ng-submit="self.add()" layout="space-out"
-          sf-tooltip="{{self.error}}" sf-trigger="{{!!self.error}}">
-      <input flex="11" tabindex="1" ng-model="self.word">
-      <button flex="1" theme="primary" tabindex="1">Add</button>
+    <form class="sf-label-row sf-label-dense" data-sf-tooltip="{{self.error}}"
+          style="height: 2.5rem" ng-submit="self.add()">
+      <input name="word" autofocus class="flex-11 theme-text-primary" ng-model="self.word">
+      <button class="flex-1 theme-primary" tabindex="1">Add</button>
     </form>
-    <div ng-repeat="word in self.words" layout="space-between space-out">
-      <span flex="11" layout="cross-center" class="pad" style="margin-right: 1rem">{{word}}</span>
-      <button flex="1" ng-click="self.remove(word)">✕</button>
+    <div class="grid-2 grid-sm-1">
+      <div ng-repeat="word in self.words" class="layout-row layout-space-between layout-cross-center">
+        <span class="flex-1 pad">{{word}}</span>
+        <button class="flex-none" ng-click="self.remove(word)">✕</button>
+      </div>
     </div>
   </div>
 
   <!-- Right column: generated results -->
-  <div flex="1" class="space-out">
-    <h3 theme="text-accent">Generated Words</h3>
-    <form ng-submit="self.generate()" layout>
-      <button flex="1" theme="accent" tabindex="1">Generate</button>
+  <div class="flex-1 container">
+    <h3 class="theme-text-accent">Generated Words</h3>
+    <form class="sf-label-row sf-label-dense" style="height: 2.5rem" ng-submit="self.generate()">
+      <button class="flex-1 theme-accent layout-center" tabindex="1">Generate</button>
     </form>
-    <div ng-repeat="word in self.results" layout="space-between">
-      <button flex="1" ng-click="self.pick(word)">←</button>
-      <span flex="11" layout="cross-center" drag-value="word" class="pad interactive"
-            style="margin-left: 1rem; cursor: move">{{word}}</span>
-    </div>
-    <div ng-if="self.depleted" layout="cross-center">
-      <span theme="text-warn" class="pad">(depleted)</span>
+    <div class="grid-2 grid-sm-1">
+      <div ng-repeat="word in self.results"
+           class="layout-row layout-space-between layout-cross-center"
+           drag-value="word" style="cursor: move">
+        <button class="flex-none" ng-click="self.pick(word)">←</button>
+        <span class="flex-1 pad text-center">{{word}}</span>
+      </div>
+      <div ng-if="self.depleted" class="layout-row layout-cross-center layout-center">
+        <span class="flex-1 theme-text-warn pad text-center">(depleted)</span>
+      </div>
     </div>
   </div>
 </div>

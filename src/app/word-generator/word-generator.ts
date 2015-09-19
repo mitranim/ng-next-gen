@@ -1,10 +1,11 @@
-import Traits from 'foliant';
 import {Component} from 'ng-decorate';
-import {Words, wordsUrl} from 'models/all';
-import {Ajax} from 'ajax/ajax';
+import Traits = require('foliant');
+import {Words, wordsUrl} from '../models/all';
+import {Ajax} from '../ajax/ajax';
 
 @Component({
-  selector: 'word-generator'
+  selector: 'word-generator',
+  templateUrl: require('./word-generator.html')
 })
 class VM {
   // Source words.

@@ -1,4 +1,5 @@
 import 'angular';
+import 'stylific';
 import {defaults} from 'ng-decorate';
 
 // Our one and only angular module.

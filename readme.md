@@ -8,7 +8,7 @@ To get started, run the following:
 ```sh
 git clone https://github.com/Mitranim/ng-next-gen ng-next-gen
 cd ng-next-gen
-npm install
+npm install  # also runs `tsd update`
 npm start
 ```
 

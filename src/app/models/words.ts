@@ -9,7 +9,7 @@ export class Words {
   @autoinject static $http: ng.IHttpService;
   [key: string]: string;
 
-  constructor(fields?: StringMap) {
+  constructor(fields?: {[key: string]: string}) {
     if (fields) for (let key in fields) this[key] = fields[key];
   }
 
@@ -18,6 +18,6 @@ export class Words {
       url: wordsUrl,
       method: 'GET'
     })
-    .then(response => new Words(<StringMap>response.data));
+    .then(response => new Words(<{[key: string]: string}>response.data));
   }
 }

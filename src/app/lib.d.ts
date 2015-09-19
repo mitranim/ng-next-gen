@@ -118,5 +118,3 @@ declare module 'foliant' {
   }
   export = Traits;
 }
-
-declare type StringMap = {[key: string]: string};

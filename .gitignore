@@ -23,9 +23,3 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
-
-# Folders to ignore
-node_modules
-bower_components
-jspm_packages
-dist

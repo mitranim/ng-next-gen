@@ -6,7 +6,7 @@
     "start": "gulp",
     "build-prod": "gulp build --prod",
     "serve-prod": "npm run build-prod && gulp server",
-    "postinstall": "tsd update",
+    "postinstall": "tsd update && tsd link",
     "push-docs": "npm run build-prod && (cd dist && git add -A . && git commit -a -m autocommit && git push origin gh-pages)"
   },
   "description": "Demo for using next-gen web technologies with today's frameworks.",
@@ -23,7 +23,7 @@
     "gulp-typescript": "^2.9.0",
     "gulp-watch": "^4.3.5",
     "html-loader": "^0.3.0",
-    "ng-decorate": "0.0.17",
+    "ng-decorate": "^0.0.18",
     "ngtemplate-loader": "^1.3.0",
     "stylific": "^0.9.0",
     "ts-loader": "^0.5.5",

@@ -44,7 +44,7 @@ function reload (done) {
 
 /*--------------------------------- Scripts ---------------------------------*/
 
-gulp.task('scripts:build', function(done) {
+function scripts (done) {
   var alias = {
     /* ... */
   };
@@ -72,7 +72,8 @@ gulp.task('scripts:build', function(done) {
         }
       ]
     },
-    plugins: prod() ? [new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})] : []
+    plugins: prod() ? [new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})] : [],
+    watch: typeof done !== 'function'
   }, function(err, stats) {
     if (err) {
       throw new Error(err);
@@ -87,14 +88,14 @@ gulp.task('scripts:build', function(done) {
       });
       if (report) console.log(report);
     }
-    done();
+    if (typeof done === 'function') done();
+    else bsync.reload();
   });
-});
+}
 
-gulp.task('scripts:watch', function() {
-  $.watch(src.scripts, gulp.series('scripts:build', reload));
-  $.watch(src.views, gulp.series('scripts:build', reload));
-});
+gulp.task('scripts:build', scripts);
+
+gulp.task('scripts:build:watch', (_) => {scripts()});
 
 /*--------------------------------- Styles ----------------------------------*/
 
@@ -155,12 +156,18 @@ gulp.task('server', function() {
 
 /*--------------------------------- Default ---------------------------------*/
 
-gulp.task('build', gulp.parallel(
-  'scripts:build', 'styles:build', 'html:build'
-));
+if (prod()) {
+  gulp.task('build', gulp.parallel(
+    'scripts:build', 'styles:build', 'html:build'
+  ));
+} else {
+  gulp.task('build', gulp.parallel(
+    'styles:build', 'html:build'
+  ));
+}
 
 gulp.task('watch', gulp.parallel(
-  'scripts:watch', 'styles:watch', 'html:watch'
+  'scripts:build:watch', 'styles:watch', 'html:watch'
 ));
 
 gulp.task('default', gulp.series('build', gulp.parallel('watch', 'server')));
